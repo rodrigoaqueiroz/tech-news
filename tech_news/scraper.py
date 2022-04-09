@@ -20,12 +20,14 @@ def scrape_novidades(html_content):
     url_links = selector.css(".tec--card__info h3 a::attr(href)").getall()
     return url_links
 
-# 'If there are no matches, None is returned.' 
+# 'If there are no matches, None is returned.'
 # Doc: https://parsel.readthedocs.io/en/latest/usage.html
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    next_page_url = selector.css(".tec--list__item ~ a::attr(href)").get()
+    return next_page_url
 
 
 # Requisito 4
@@ -36,6 +38,3 @@ def scrape_noticia(html_content):
 # Requisito 5
 def get_tech_news(amount):
     """Seu código deve vir aqui"""
-
-html = fetch('https://www.tecmundo.com.br/novidades')
-print(len(scrape_novidades(html)))
