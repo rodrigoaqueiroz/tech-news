@@ -23,6 +23,7 @@ def scrape_novidades(html_content):
 # 'If there are no matches, None is returned.'
 # Doc: https://parsel.readthedocs.io/en/latest/usage.html
 
+
 # Requisito 3
 def scrape_next_page_link(html_content):
     selector = Selector(text=html_content)
