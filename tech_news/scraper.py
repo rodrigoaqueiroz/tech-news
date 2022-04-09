@@ -1,10 +1,11 @@
 import requests
 import time
+from parsel import Selector
 
 
 def fetch(url):
     try:
-        response = requests.get(url, timeout=2)
+        response = requests.get(url, timeout=3)
         time.sleep(1)
         if response.status_code == 200:
             return response.text
@@ -15,8 +16,12 @@ def fetch(url):
 
 # Requisito 2
 def scrape_novidades(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    url_links = selector.css(".tec--card__info h3 a::attr(href)").getall()
+    return url_links
 
+# 'If there are no matches, None is returned.' 
+# Doc: https://parsel.readthedocs.io/en/latest/usage.html
 
 # Requisito 3
 def scrape_next_page_link(html_content):
@@ -31,3 +36,6 @@ def scrape_noticia(html_content):
 # Requisito 5
 def get_tech_news(amount):
     """Seu código deve vir aqui"""
+
+html = fetch('https://www.tecmundo.com.br/novidades')
+print(len(scrape_novidades(html)))
