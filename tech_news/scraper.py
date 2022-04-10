@@ -1,6 +1,7 @@
 import requests
 import time
 from parsel import Selector
+from tech_news.database import create_news
 from tech_news.scrape_noticias_functions import (
     get_url, get_title, get_timestamp,
     get_writer, get_shares_count, get_comments_count,
@@ -57,7 +58,20 @@ def scrape_noticia(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    # url = 'https://www.tecmundo.com.br/novidades'
-    news_amount = amount
-    return news_amount
-# url = 'https://www.tecmundo.com.br/novidades'
+    URL_BASE = 'https://www.tecmundo.com.br/novidades'
+    news_to_save = []
+
+    while len(news_to_save) < amount:
+        get_scrapped_url = fetch(URL_BASE)
+        get_scrapped_news = scrape_novidades(get_scrapped_url)
+
+        for url_news_content in get_scrapped_news:
+            if len(news_to_save) < amount:
+                content_html = fetch(url_news_content)
+                content_news = scrape_noticia(content_html)
+                news_to_save.append(content_news)
+
+        URL_BASE = scrape_next_page_link(get_scrapped_url)
+
+    create_news(news_to_save)
+    return news_to_save
