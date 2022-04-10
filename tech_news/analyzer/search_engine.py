@@ -1,5 +1,5 @@
 from tech_news.analyzer.seach_engine_utils_funcions import (
-    get_by_title, get_by_date, get_by_source
+    get_by_title, get_by_date, get_by_source, get_by_category
 )
 
 
@@ -12,8 +12,8 @@ def search_by_title(title):
 
 # Requisito 7
 def search_by_date(date):
-    get_dates = get_by_date(date)
-    dates = [(element["title"], element["url"]) for element in get_dates]
+    get_date = get_by_date(date)
+    dates = [(element["title"], element["url"]) for element in get_date]
     return dates
 
 
@@ -26,4 +26,8 @@ def search_by_source(source):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    get_category = get_by_category(category)
+    categories = [
+        (element["title"], element["url"]) for element in get_category
+    ]
+    return categories
