@@ -1,4 +1,6 @@
-from tech_news.analyzer.seach_engine_utils_funcions import get_by_title
+from tech_news.analyzer.seach_engine_utils_funcions import (
+    get_by_title, get_by_date
+)
 
 
 # Requisito 6
@@ -10,7 +12,9 @@ def search_by_title(title):
 
 # Requisito 7
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    get_dates = get_by_date(date)
+    dates = [(element["title"], element["url"]) for element in get_dates]
+    return dates
 
 
 # Requisito 8
