@@ -1,6 +1,11 @@
+from tech_news.analyzer.seach_engine_utils_funcions import get_by_title
+
+
 # Requisito 6
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    get_title = get_by_title(title)
+    titles = [(element["title"], element["url"]) for element in get_title]
+    return titles
 
 
 # Requisito 7
