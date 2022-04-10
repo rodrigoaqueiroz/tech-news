@@ -15,6 +15,10 @@ def get_by_date(parameter):
     query = search_news({"timestamp": {"$regex": parameter, "$options": "i"}})
     return query
 
+
+def get_by_source(parameter):
+    query = search_news({"sources": {"$regex": parameter, "$options": "i"}})
+    return query
 # Referencia:
 # https://www.mongodb.com/docs/manual/reference/operator/query/regex/
 # To case insensitive

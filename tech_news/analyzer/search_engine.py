@@ -1,5 +1,5 @@
 from tech_news.analyzer.seach_engine_utils_funcions import (
-    get_by_title, get_by_date
+    get_by_title, get_by_date, get_by_source
 )
 
 
@@ -19,7 +19,9 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    get_source = get_by_source(source)
+    sources = [(element["title"], element["url"]) for element in get_source]
+    return sources
 
 
 # Requisito 9
